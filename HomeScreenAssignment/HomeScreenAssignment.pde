@@ -7,8 +7,8 @@
 
 //Global Variables
 color circleRed = #FF0303, white=255, black=0, pink=#FF00E6, brown=#BC6F2F, blue=#00B0FF, orange=#FFAF00;
-color yellow=#FFF300;
-Boolean turnOnYellow=false, turnOnPink=false, turnOnBrown=false, turnOnBlue=false, turnOnOrange=false;
+color yellow1=#FFF300;
+Boolean turnOnYellow1=false, turnOnPink=false, turnOnBrown=false, turnOnBlue=false, turnOnOrange=false, turnOnMeasles = false, turnOnImage = false;
 float ptDiameter, rectWidth, rectHeight;
 float pt1X, pt1Y, pt2X, pt2Y, pt3X, pt3Y, pt4X, pt4Y;
 float pt5X, pt5Y, pt6X, pt6Y, pt7X, pt7Y, pt8X, pt8Y;
@@ -23,9 +23,21 @@ float button6X, button6Y, button6Width, button6Height;
 float button7X, button7Y, button7Width, button7Height;
 float button8X, button8Y, button8Width, button8Height;
 float button9X, button9Y, button9Width, button9Height;
+float imageStartWidth, imageStartHeight, imageWidth, imageHeight;
+float imageWidthRatio;
+float imageHeightRatio;
+PImage pic;
 
 void setup() {
   size(800, 700);
+  pic = loadImage("https://www.alberniweather.ca/wp-content/uploads/2015/06/image40.jpg");
+  imageWidthRatio = 1920.0/1080.0;
+  imageHeightRatio = 1080.0/1080.0;
+  imageStartWidth = width*0/16;
+  imageStartHeight = height*0/16;
+  imageWidth = width*imageWidthRatio;
+  imageHeight = height*imageHeightRatio;
+  
   ptDiameter = width * 1 / 27.77777777;
   rectWidth = width*1/3;
   rectHeight = height*1/3;
@@ -90,14 +102,16 @@ void setup() {
   button9Width = width* 1/3 * 1/2;
   button9Height = height* 1/3 * 1/2;
   
-}
+
+}//End setup
 
 void draw() {
+  
   //fill(white);
   rect(pt1X, pt1Y, rectWidth, rectHeight);
   //Bug: must press reset, Btn#4, each time to reset colour
-  if (turnOnYellow == true ) {
-    fill(yellow);
+  if (turnOnYellow1 == true ) {
+    fill(yellow1);
   }
   if (turnOnPink == true) {
     fill(pink);
@@ -130,63 +144,63 @@ void draw() {
 
   //Button Rectangles
   if ( mouseX>=button1X && mouseX<=button1X+button1Width && mouseY>=button1Y && mouseY<=button1Y+button1Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button1X, button1Y, button1Width, button1Height);
   } else {
     fill(black);
     rect(button1X, button1Y, button1Width, button1Height);
   }
   if ( mouseX>=button2X && mouseX<=button2X+button2Width && mouseY>=button2Y && mouseY<=button2Y+button2Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button2X, button2Y, button2Width, button2Height);
   } else {
     fill(black);
     rect(button2X, button2Y, button2Width, button2Height);
   }
   if ( mouseX>=button3X && mouseX<=button3X+button3Width && mouseY>=button3Y && mouseY<=button3Y+button3Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button3X, button3Y, button3Width, button3Height);
   } else {
     fill(black);
     rect(button3X, button3Y, button3Width, button3Height);
   }
   if ( mouseX>=button4X && mouseX<=button4X+button4Width && mouseY>=button4Y && mouseY<=button4Y+button4Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button4X, button4Y, button4Width, button4Height);
   } else {
     fill(black);
     rect(button4X, button4Y, button4Width, button4Height);
   }
   if ( mouseX>=button5X && mouseX<=button5X+button5Width && mouseY>=button5Y && mouseY<=button5Y+button5Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button5X, button5Y, button5Width, button5Height);
   } else {
     fill(black);
     rect(button5X, button5Y, button5Width, button5Height);
   }
   if ( mouseX>=button6X && mouseX<=button6X+button6Width && mouseY>=button6Y && mouseY<=button6Y+button1Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button6X, button6Y, button6Width, button6Height);
   } else {
     fill(black);
     rect(button6X, button6Y, button6Width, button6Height);
   }
   if ( mouseX>=button7X && mouseX<=button7X+button7Width && mouseY>=button7Y && mouseY<=button7Y+button7Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button7X, button7Y, button7Width, button7Height);
   } else {
     fill(black);
     rect(button7X, button7Y, button7Width, button7Height);
   }
   if ( mouseX>=button8X && mouseX<=button8X+button8Width && mouseY>=button8Y && mouseY<=button8Y+button8Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button8X, button8Y, button8Width, button8Height);
   } else {
     fill(black);
     rect(button8X, button8Y, button8Width, button8Height);
   }
   if ( mouseX>=button9X && mouseX<=button9X+button9Width && mouseY>=button9Y && mouseY<=button9Y+button9Height) {
-    fill(yellow);
+    fill(yellow1);
     rect(button9X, button9Y, button9Width, button9Height);
   } else {
     fill(black);
@@ -214,106 +228,163 @@ void draw() {
   ellipse(pt16X, pt16Y, ptDiameter, ptDiameter);
   fill(white);
   
-   String title = "Button 1/ Yellow";
+ 
+    
+   String title = "Button 1 / Yellow";
 PFont titleFont;
 titleFont = createFont ("Times New Roman Bold", 30);
   fill(0); 
-  textAlign(CENTER, CENTER);
+ // textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*1/50, height*0/16, width*1/2, height*1/16 );
+text(title, width*0/50, height*0/16, width*8/24, height*1/16 );
 fill(255);
 
-String titdle = "Button 2/ Clear Color";
-PFont font2;
-font2 = createFont ("Times New Roman Bold", 30);
+String title2 = "Button 3 / Clear Color";
+PFont titleFont2;
+titleFont2 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
-fill(255);
-/*
-String title = "Button 3/ Clear Color";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
-  fill(0); 
-  textAlign(CENTER, CENTER);
-  textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title2, width*20/34, height*0/16, width*1/2, height*1/16 );
 fill(255);
 
-String title = "Button 4/ Clear Color";
-PFont titleFont;
+String title3 = "Button 2 / Blue";
+PFont titleFont3;
 titleFont = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title3, width*9/34, height*0/16, width*1/2, height*1/16 );
 fill(255);
 
-String title = "Button 5/ Clear Color";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
+String title4 = "Button 4 / No Function";
+PFont titleFont4;
+titleFont4 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title4, width*0/50, height*7/20, width*8/24, height*1/16 );
 fill(255);
 
-String title = "Button 6 / Clear Color";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
+String title5 = "Button 5 / Pink";
+PFont titleFont5;
+titleFont5 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title5, width*8/34, height*7/20, width*1/2, height*1/16 );
 fill(255);
 
-String title = "Button 7/ Clear Color";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
+String title6 = "Button 6 / Measles (not fully working)";
+PFont titleFont6;
+titleFont6 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title6, width*20/34, height*7/20, width*1/2, height*1/16 );
 fill(255);
 
-String title = "Button 8";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
+String title7 = "Button 7 / Image pls";
+PFont titleFont7;
+titleFont7 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title7, width*0/50, height*22/32, width*8/24, height*1/16 );
 fill(255);
 
-String title = "Button 9";
-PFont titleFont;
-titleFont = createFont ("Times New Roman Bold", 30);
+String title8 = "Button 8 / No Function";
+PFont titleFont8;
+titleFont8 = createFont ("Times New Roman Bold", 30);
   fill(0); 
   textAlign(CENTER, CENTER);
   textFont(titleFont, 15);
-text(title, width*20/34, height*0/16, width*1/2, height*1/16 );
+text(title8, width*9/34, height*22/32, width*1/2, height*1/16 );
 fill(255);
-*/
+
+String title9 = "Button 9 / Brown";
+PFont titleFont9;
+titleFont9 = createFont ("Times New Roman Bold", 30);
+  fill(0); 
+  textAlign(CENTER, CENTER);
+  textFont(titleFont, 15);
+text(title9, width*20/34, height*22/32, width*1/2, height*1/16 );
+fill(255);
+
+ if (turnOnMeasles == true) {
+    setup1();
+    draws();
+ 
+  }
+  
+  if(turnOnImage == true) {
+     
+    rect(imageStartWidth, imageStartHeight, imageWidth, imageHeight);
+  image (pic, imageStartWidth, imageStartHeight, imageWidth, imageHeight);
+  if (mouseX>buttonX && mouseX<width && mouseY>height*0 && mouseY<buttonHeight) { //Button Hoverover;
+    buttonColour = yellow; //Hoverover
+  } else {
+    buttonColour = purple;
+  }// End IF
+  String xtitle = "X";
+PFont xtitleFont;
+xtitleFont = createFont ("Times New Roman Bold", 30);
+  fill(buttonColour); 
+  rect(buttonX, buttonY, buttonWidth, buttonHeight);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  textFont(titleFont, 20);
+text(xtitle, width*23/32, height*0/16, width*1/2, height*1/16 );
+fill(colorReset);
+  }
+
 }
 
 void mousePressed() {
   if ( mouseX>=button1X && mouseX<=button1X+button1Width && mouseY>=button1Y && mouseY<=button1Y+button1Height) {
     println("Btn 1 activated");
-    turnOnYellow = true;
+    turnOnYellow1 = true;
   }
   if ( mouseX>=button2X && mouseX<=button2X+button2Width && mouseY>=button2Y && mouseY<=button2Y+button2Height) {
-    println("Btn 2 activated");
+    println("Btn 5 activated");
     turnOnPink = true;
   }
   if ( mouseX>=button3X && mouseX<=button3X+button3Width && mouseY>=button3Y && mouseY<=button3Y+button3Height) {
-    println("Btn 3 activated");
+    println("Btn 9 activated");
     turnOnBrown = true;
   }
   if ( mouseX>=button4X && mouseX<=button4X+button4Width && mouseY>=button4Y && mouseY<=button4Y+button4Height) {
-    println("Btn 4 activated");
-    turnOnYellow = false;
+    println("Btn 3 activated");
+    turnOnYellow1 = false;
     turnOnPink = false;
     turnOnBrown = false;
+    turnOnBlue = false;
+    turnOnImage = false;
+    
   }
+  if ( mouseX>=button5X && mouseX<=button5X+button5Width && mouseY>=button5Y && mouseY<=button5Y+button5Height) {
+    println("Btn 2 activated");
+    turnOnBlue = true;
+  }
+  if ( mouseX>=button6X && mouseX<=button6X+button6Width && mouseY>=button6Y && mouseY<=button6Y+button6Height) {
+    println("Btn 6 activated");
+    turnOnMeasles = true;
+  }
+  
+  if ( mouseX>=button8X && mouseX<=button8X+button8Width && mouseY>=button8Y && mouseY<=button8Y+button8Height) {
+    println("Btn 8 activated");
+    turnOnImage = true;
+  }
+  /*
+  if ( mouseX>=button1X && mouseX<=button1X+button1Width && mouseY>=button1Y && mouseY<=button1Y+button1Height) {
+    println("Btn 1 activated");
+    turnOnYellow1 = true;
+  }
+  if ( mouseX>=button1X && mouseX<=button1X+button1Width && mouseY>=button1Y && mouseY<=button1Y+button1Height) {
+    println("Btn 1 activated");
+    turnOnYellow1 = true;
+  }
+  */
+  
+  pressedMouse();
 }
