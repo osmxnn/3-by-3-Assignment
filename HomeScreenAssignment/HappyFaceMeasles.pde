@@ -20,7 +20,6 @@ int rightPupilX, rightPupilY, rightPupilDiameter;
 void setup1() {
   population();
   //fullScreen();
-  println("Screen Width is", displayWidth, "Screen Height is", displayHeight);
   background(0);
   color(255);
   ellipse(faceX, faceY, faceDiameter, faceDiameter);
